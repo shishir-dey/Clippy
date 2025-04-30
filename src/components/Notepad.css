@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   max-width: 800px;
+  flex: 1;
 }
 
 .notepad-paper {
@@ -151,18 +152,28 @@
 
 /* For iPhone and smaller devices */
 @media (max-width: 480px) {
-  .notepad-paper {
-    min-height: 70vh;
+  .notepad-container {
     width: 100%;
+    max-width: 100%;
+    margin: 0;
+    flex: 1;
+  }
+
+  .notepad-paper {
+    min-height: 100vh;
+    width: 100%;
+    border-radius: 0;
+    margin-bottom: 0;
+    box-shadow: none;
   }
 
   .editor-container {
     padding: 1rem;
-    min-height: calc(70vh - 50px);
+    min-height: calc(100vh - 50px);
   }
 
   .ProseMirror {
-    min-height: calc(70vh - 100px);
+    min-height: calc(100vh - 100px);
   }
 
   .toolbar {
@@ -183,14 +194,15 @@
 /* For iPad and medium devices */
 @media (min-width: 481px) and (max-width: 768px) {
   .notepad-paper {
-    min-height: 80vh;
+    min-height: 100vh;
+    border-radius: 4px;
   }
 
   .editor-container {
-    min-height: calc(80vh - 50px);
+    min-height: calc(100vh - 50px);
   }
 
   .ProseMirror {
-    min-height: calc(80vh - 100px);
+    min-height: calc(100vh - 100px);
   }
 }

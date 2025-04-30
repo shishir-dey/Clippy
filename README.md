@@ -1,4 +1,6 @@
-# Clippy
+# Clippy <img src="src/assets/icon.png" alt="Clippy Icon" width="32" height="32">
+
+[![pages-build-deployment](https://github.com/shishir-dey/Clippy/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/shishir-dey/Clippy/actions/workflows/pages/pages-build-deployment)
 
 A minimal notepad for mobile and web, as a tribute to Microsoft's assistant Clippy.
 

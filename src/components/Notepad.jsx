@@ -74,7 +74,7 @@ const MenuBar = ({ editor, onClear }) => {
         <button
           className="macos-button close-button"
           onClick={onClear}
-          title="Clear Notepad"
+          title="Clear Clippy"
         ></button>
       </div>
     </div>
@@ -85,7 +85,7 @@ const Notepad = () => {
   // Retrieve content from local storage
   const [savedContent, setSavedContent] = useState(() => {
     try {
-      const saved = localStorage.getItem("notepad-content");
+      const saved = localStorage.getItem("clippy-content");
       return saved || "";
     } catch (error) {
       console.error("Error loading from localStorage:", error);
@@ -108,7 +108,7 @@ const Notepad = () => {
     onUpdate: ({ editor }) => {
       try {
         const html = editor.getHTML();
-        localStorage.setItem("notepad-content", html);
+        localStorage.setItem("clippy-content", html);
         setSavedContent(html);
       } catch (error) {
         console.error("Error saving to localStorage:", error);
@@ -120,7 +120,7 @@ const Notepad = () => {
   const clearNotepad = () => {
     if (editor) {
       editor.commands.clearContent();
-      localStorage.removeItem("notepad-content");
+      localStorage.removeItem("clippy-content");
       setSavedContent("");
     }
   };
