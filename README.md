@@ -1,6 +1,6 @@
-# Notepad
+# Clippy
 
-A responsive web-based notepad with rich text editing capabilities, inspired by Apple's aesthetic.
+A minimal notepad for mobile and web, as a tribute to Microsoft's assistant Clippy.
 
 ## Features
 
