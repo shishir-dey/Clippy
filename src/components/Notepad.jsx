@@ -1,10 +1,21 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Placeholder from "@tiptap/extension-placeholder";
 import Heading from "@tiptap/extension-heading";
 import "./Notepad.css";
+
+// Utility function for debouncing
+const debounce = (fn, delay) => {
+  let timer;
+  return function (...args) {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+};
 
 const MenuBar = ({ editor, onClear }) => {
   if (!editor) {
@@ -92,10 +103,38 @@ const Notepad = () => {
       return "";
     }
   });
+  const [currentContent, setCurrentContent] = useState(savedContent);
+
+  // Create a ref to store the latest editor content
+  const contentRef = useRef(currentContent);
+
+  // Save function
+  const saveToLocalStorage = useCallback((html) => {
+    try {
+      localStorage.setItem("clippy-content", html);
+      setSavedContent(html);
+    } catch (error) {
+      console.error("Error saving to localStorage:", error);
+    }
+  }, []);
+
+  // Debounced save function - only saves after 1 second of inactivity
+  const debouncedSave = useCallback(
+    debounce((html) => {
+      saveToLocalStorage(html);
+    }, 1000),
+    [saveToLocalStorage],
+  );
 
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        // Disable history as it can cause performance issues with large documents
+        history: {
+          depth: 100, // Reduce history stack depth
+          newGroupDelay: 500, // Increase delay for grouping history events
+        },
+      }),
       Underline,
       Placeholder.configure({
         placeholder: "Start typing...",
@@ -106,22 +145,54 @@ const Notepad = () => {
     ],
     content: savedContent,
     onUpdate: ({ editor }) => {
-      try {
-        const html = editor.getHTML();
-        localStorage.setItem("clippy-content", html);
-        setSavedContent(html);
-      } catch (error) {
-        console.error("Error saving to localStorage:", error);
-      }
+      const html = editor.getHTML();
+      contentRef.current = html; // Update the ref with latest content
+      setCurrentContent(html);
+      debouncedSave(html);
     },
     autofocus: true,
+    // Add performance optimization settings
+    enableInputRules: true,
+    enablePasteRules: false, // Disable paste rules which can be expensive
+    // Reduce amount of updates
+    editorProps: {
+      attributes: {
+        class: "prose prose-sm focus:outline-none",
+      },
+      handleDOMEvents: {
+        keydown: (_view, event) => {
+          // Allow default handling
+          return false;
+        },
+      },
+    },
   });
+
+  // Effect to handle tab/window close
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      // Save the latest content directly without debouncing when closing
+      saveToLocalStorage(contentRef.current);
+    };
+
+    // Add event listeners for tab/window close
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Cleanup on component unmount
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      // Save content on component unmount as well
+      saveToLocalStorage(contentRef.current);
+    };
+  }, [saveToLocalStorage]);
 
   const clearNotepad = () => {
     if (editor) {
       editor.commands.clearContent();
       localStorage.removeItem("clippy-content");
       setSavedContent("");
+      setCurrentContent("");
+      contentRef.current = "";
     }
   };
 

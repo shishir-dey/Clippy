@@ -5,12 +5,15 @@
   width: 100%;
   max-width: 800px;
   flex: 1;
+  /* Add will-change to optimize GPU acceleration */
+  will-change: transform;
 }
 
 .notepad-paper {
   background-color: var(--paper-color);
   border-radius: 8px;
-  box-shadow: 0 8px 30px var(--shadow-color);
+  /* Simplify box-shadow for better performance */
+  box-shadow: 0 6px 16px var(--shadow-color);
   margin-bottom: 1.5rem;
   width: 100%;
   /* A4 ratio (1:√2) */
@@ -18,6 +21,9 @@
   min-height: 842px;
   overflow: hidden;
   position: relative;
+  /* Use translate3d to force GPU acceleration */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 .editor-container {
@@ -40,6 +46,8 @@
   height: 100%;
   min-height: 740px;
   outline: none;
+  /* Don't animate carets - better performance */
+  caret-color: currentColor;
 }
 
 .ProseMirror p {
