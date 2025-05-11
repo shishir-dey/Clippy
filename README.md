@@ -1,4 +1,4 @@
-# Clippy <img src="src/assets/icon.png" alt="Clippy Icon" width="32" height="32">
+# Clippy <img src="assets/icon.png" alt="Clippy Icon" width="32" height="32">
 
 [![pages-build-deployment](https://github.com/shishir-dey/Clippy/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/shishir-dey/Clippy/actions/workflows/pages/pages-build-deployment)
 
