@@ -1,7 +1,7 @@
 {
   "name": "clippy",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "homepage": "https://shishir-dey.github.io/Clippy",
   "scripts": {
@@ -15,26 +15,26 @@
   },
   "dependencies": {
     "@emotion/css": "^11.13.5",
-    "@tiptap/extension-heading": "^2.11.9",
-    "@tiptap/extension-placeholder": "^2.12.0",
-    "@tiptap/extension-underline": "^2.12.0",
-    "@tiptap/pm": "^2.11.9",
-    "@tiptap/react": "^2.12.0",
-    "@tiptap/starter-kit": "^2.12.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@tiptap/extension-heading": "^3.30.1",
+    "@tiptap/extension-placeholder": "^3.30.1",
+    "@tiptap/extension-underline": "^3.30.1",
+    "@tiptap/pm": "^3.30.1",
+    "@tiptap/react": "^3.30.1",
+    "@tiptap/starter-kit": "^3.30.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@eslint/js": "^9.26.0",
-    "@types/react": "^19.1.6",
-    "@types/react-dom": "^19.1.5",
-    "@vitejs/plugin-react": "^4.5.0",
-    "eslint": "^9.28.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "gh-pages": "^6.1.1",
-    "globals": "^16.2.0",
-    "prettier": "^3.3.3",
-    "vite": "^6.3.5"
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "eslint": "^10.8.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.4",
+    "gh-pages": "^6.3.0",
+    "globals": "^17.11.0",
+    "prettier": "^3.9.6",
+    "vite": "^8.2.1"
   }
 }
