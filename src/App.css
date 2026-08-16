@@ -1,5 +1,5 @@
 :root {
-  --app-background: #1e1e1e;
+  --app-background: #f6eee3;
   --paper-color: #fff;
   --text-color: #333;
   --button-bg: #f2f2f7;
@@ -15,12 +15,34 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--app-background);
   color: var(--text-color);
+}
+
+html {
+  /* Safari 26+ falls back to this when body sampling is unavailable. */
+  background-color: var(--app-background);
+}
+
+/*
+ * Safari 26+ on macOS extends the color of a viewport-constrained element
+ * into its top browser UI. Keep this as a real element: pseudo-elements and
+ * absolutely positioned children are not eligible for color sampling.
+ */
+.safari-tint-sampler {
+  background-color: var(--app-background);
+  height: 4px;
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
 }
 
 .app-container {
